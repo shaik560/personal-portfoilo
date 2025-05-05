@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #f0f4f8; /* Light grey background for a clean look */
+    color: #333; /* Dark text for readability */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contact Section Styles */
+section#contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.85); /* Glassmorphism effect */
+    padding: 40px;
+    border-radius: 16px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for premium feel */
+    -webkit-backdrop-filter: blur(15px); /* Glassmorphism blur */
+    backdrop-filter: blur(15px); /* Safari support */
+}
+
+h2 {
+    font-size: 32px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+input, textarea {
+    width: 100%;
+    background: transparent;
+    border: 2px solid #ccc;
+    padding: 12px;
+    border-radius: 8px;
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 30px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #999;
+}
+
+input:focus, textarea:focus {
+    border-color: #6c63ff; /* Premium color accent */
+    background-color: rgba(108, 99, 255, 0.1); /* Light accent background on focus */
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+button.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #6c63ff; /* Premium color */
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.4s ease, transform 0.3s ease;
+}
+
+button.submit-btn:hover {
+    background-color: #5148d1;
+    transform: translateY(-3px); /* Lift effect */
+    box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3); /* Subtle shadow */
+}
+
+#formStatus {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+    color: #6c63ff; /* Premium accent for form status */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    button.submit-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <p class="subtitle">We'd love to hear from you. Please fill out the form below.</p>
+            <form id="contactForm">
+                <div class="input-container">
+                    <input type="text" id="name" name="name" placeholder="Your Full Name" required>
+                    <label for="name">Full Name</label>
+                </div>
+
+                <div class="input-container">
+                    <input type="email" id="email" name="email" placeholder="Your Email Address" required>
+                    <label for="email">Email Address</label>
+                </div>
+
+                <div class="input-container">
+                    <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                    <label for="message">Message</label>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Message</button>
+                <div id="formStatus"></div> <!-- Form status display -->
+            </form>
+        </div>
+    </section>
+
+    <script src="scripts.js">
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    // Retrieve input values
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+    const formStatus = document.getElementById("formStatus");
+
+    // Basic validation
+    if (name === "" || email === "" || message === "") {
+        formStatus.style.color = "red";
+        formStatus.innerHTML = "All fields are required.";
+        alert("Error: All fields are required. Please fill out the form completely.");
+        return;
+    }
+
+    // Validate email format
+    if (!validateEmail(email)) {
+        formStatus.style.color = "red";
+        formStatus.innerHTML = "Please enter a valid email address.";
+        alert("Error: Invalid email format. Please enter a valid email address.");
+        return;
+    }
+
+    // Simulate form submission success
+    formStatus.style.color = "#6c63ff";
+    formStatus.innerHTML = "Message sent successfully!";
+    alert("Success: Your message has been sent!");
+
+    // Clear form fields after submission
+    document.getElementById("contactForm").reset();
+});
+
+// Function to validate email format
+function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+    </script>
+
+</body>
+</html>
