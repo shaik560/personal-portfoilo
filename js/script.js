@@ -3,7 +3,7 @@ let htmlProgress = document.querySelector(".html-css"),
   htmlValue = document.querySelector(".html-progress");
 
 let htmlStartValue = 0,
-  htmlEndValue = 90,
+  htmlEndValue = 50,
   htmlspeed = 30;
 
 let progresshtml = setInterval(() => {
@@ -24,7 +24,7 @@ let javascriptProgress = document.querySelector(".javascript"),
   javascriptValue = document.querySelector(".javascript-progress");
 
 let javascriptStartValue = 0,
-  javascriptEndValue = 80,
+  javascriptEndValue = 60,
   jsspeed = 30;
 
 let progressjs = setInterval(() => {
